@@ -1,0 +1,45 @@
+[
+    {
+      "type": "message",
+      "message": "Now that you knew the reasons, help Jamie focus and finish shopping.",
+      "choices": null,
+      "stateInfluence": null
+    },
+    {
+      "type": "question",
+      "message": "..... [Jamie's struggles]",
+      "choices": ["No list? No problem! Let's ...", "Sooo… what's up with the rubber duck", "OMG, this happened again ..", "Say nothing. "],
+      "stateInfluence": [1, -1, 0, 0]
+    },
+    {
+      "type": "message",
+      "message": "a",
+      "choices": null,
+      "stateInfluence": null
+    },
+    {
+      "type": "question",
+      "message": "b",
+      "choices": ["1", "2", "3"],
+      "stateInfluence": [1, -1 , 0]
+    },
+    {
+      "type": "question",
+      "message": "c",
+      "choices": ["1", "2"],
+      "stateInfluence": [1, -1]
+    },
+    {
+      "type": "question",
+      "message": "c",
+      "choices": ["1", "2", "3", "4"],
+      "stateInfluence": [1, -1 , 0, 1]
+    },
+    {
+      "type": "message",
+      "message": "Great jobs! ...",
+      "choices": null,
+      "stateInfluence": null
+    }
+  ]
+  

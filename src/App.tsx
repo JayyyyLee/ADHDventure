@@ -1,0 +1,85 @@
+import { useState } from "react";
+import IntroScene from "./components/IntroScene";
+import ConversationScene from "./components/ConversationScene";
+import StartScreen from "./components/StartScreen";
+import MapScreen from "./components/MapScreen";
+import SelectionScene from "./components/SelectionScene";
+
+const App = () => {
+  const [gameStarted, setGameStarted] = useState(false);
+  const [mapComplete, setMapComplete] = useState(false);
+  const [introComplete, setIntroComplete] = useState(false);
+  const [selectionComplete, setSelectionComplete] = useState(false);
+  const [selectedMessage, setSelectedMessage] = useState("");
+  const [clickedBoxes, setClickedBoxes] = useState(new Set<number>());
+
+  const handleBoxClick = (id: number, message: string) => {
+    setClickedBoxes((prev) => {
+      const newSet = new Set(prev);
+      newSet.add(id);
+      return newSet;
+    });
+    setSelectedMessage(message);
+  };
+
+  const restartGame = () => {
+    setGameStarted(false);
+    setMapComplete(false);
+    setIntroComplete(false);
+    setSelectionComplete(false);
+    setSelectedMessage("");
+    setClickedBoxes(new Set<number>());
+  };
+
+  return (
+    <div className="d-flex align-items-center justify-content-center vh-100 bg-secondary">
+      <div
+        className="position-relative d-flex flex-column align-items-center justify-content-between"
+        style={{
+          width: "375px",
+          height: "667px",
+          backgroundColor: "white",
+          border: "4px solid black",
+          borderRadius: "15px",
+          overflow: "hidden",
+        }}
+      >
+        {!gameStarted ? (
+          <StartScreen onStart={() => setGameStarted(true)} />
+        ) : !mapComplete ? (
+          <div className="position-relative w-100 h-100">
+            <button
+              className="position-absolute top-0 start-0 m-2 btn btn-secondary"
+              onClick={restartGame}
+            >
+              Return
+            </button>
+            <MapScreen
+              onMapComplete={() => setMapComplete(true)}
+              onReturn={restartGame}
+              boxPositions={[
+                { x: 50, y: 100 }, // First box
+                { x: 200, y: 250 }, // Second box
+                { x: 100, y: 400 }, // Lowest box (clickable)
+              ]}
+            />
+          </div>
+        ) : !introComplete ? (
+          <IntroScene onIntroComplete={() => setIntroComplete(true)} />
+        ) : !selectionComplete ? (
+          <SelectionScene
+            onSelectionComplete={() => setSelectionComplete(true)}
+            setSelectedMessage={setSelectedMessage}
+            selectedMessage={selectedMessage}
+            onBoxClick={handleBoxClick}
+            clickedBoxes={clickedBoxes}
+          />
+        ) : (
+          <ConversationScene onRestart={restartGame} />
+        )}
+      </div>
+    </div>
+  );
+};
+
+export default App;
