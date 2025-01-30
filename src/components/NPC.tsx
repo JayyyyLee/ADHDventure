@@ -9,7 +9,7 @@ const NPC = ({
 }) => {
   return (
     <img
-      src={"${import.meta.env.BASE_URL}" + image}
+      src={image}
       alt="NPC"
       style={{
         position: "absolute",
