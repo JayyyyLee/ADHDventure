@@ -10,7 +10,7 @@ const getNPCImage = (state: number) => {
   if (state === 0) return `${import.meta.env.BASE_URL}test3.jpg`.trim();
   if (state === 1) return `${import.meta.env.BASE_URL}test4.jpg`.trim();
   if (state === 2) return `${import.meta.env.BASE_URL}test5.jpg`.trim();
-  return "/test3.jpg";
+  return `${import.meta.env.BASE_URL}test3.jpg`;
 };
 
 const ConversationScene = ({
@@ -62,7 +62,9 @@ const ConversationScene = ({
       <NPC
         position={npcState.position}
         size={{ width: 100, height: 100 }}
-        image={isTalking ? "/talking.gif" : npcState.image}
+        image={
+          isTalking ? `${import.meta.env.BASE_URL}talking.gif` : npcState.image
+        }
       />
       {isQuestion && (
         <div
