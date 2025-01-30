@@ -1,18 +1,18 @@
 [
-    {
-      "message": "You and your friend Jamie (who has ADHD) are at the grocery store, picking up ingredients for a dinner party."
-    },
-    {
-      "message": "But there's a problem: Jamie forgot the shopping list at home. They're getting distracted and adding random items to the cart. They freeze when choosing between different products."
-    },
-    {
-      "message": "This situation happened a lot of times before, and you can't help wondering why."
-    },
-    {
-      "message": "Let's explore the surroundings and try to find some clues!"
-    },
-    {
-      "message": "For example, you can take a closer look at the shopping cart. Tap the cart for more information "
-    }
-  ]
-  
+  {
+    "message": "You and your friend Maddie are at the grocery store, picking up ingredients for a big dinner party tonight.",
+    "image": "/sup1.png"
+  },
+  {
+    "message": "As you begin to shop, you notice familiar challenges cropping up—there's confusion about the list, and the cart is quickly filling with unexpected items.",
+    "image": "/sup2.png"
+  },
+  {
+    "message": "This has happened before, leaving you both wondering what's really going on.",
+    "image": "/sup2.png"
+  },
+  {
+    "message": "Let's look around for clues!",
+    "image": "/sup2.png"
+  }
+]
