@@ -44,7 +44,7 @@ const ConversationScene = ({
   useEffect(() => {
     if (isQuestion) {
       setIsTalking(true);
-      const timer = setTimeout(() => setIsTalking(false), 2000);
+      const timer = setTimeout(() => setIsTalking(false), 1200);
       return () => clearTimeout(timer);
     }
   }, [selectionCount]);
