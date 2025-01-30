@@ -44,26 +44,24 @@ const App = () => {
           overflow: "hidden",
         }}
       >
+        <button
+          className="position-absolute top-0 start-0 m-2 btn btn-secondary"
+          onClick={restartGame}
+        >
+          Return
+        </button>
         {!gameStarted ? (
           <StartScreen onStart={() => setGameStarted(true)} />
         ) : !mapComplete ? (
-          <div className="position-relative w-100 h-100">
-            <button
-              className="position-absolute top-0 start-0 m-2 btn btn-secondary"
-              onClick={restartGame}
-            >
-              Return
-            </button>
-            <MapScreen
-              onMapComplete={() => setMapComplete(true)}
-              onReturn={restartGame}
-              boxPositions={[
-                { x: 50, y: 100 }, // First box
-                { x: 200, y: 250 }, // Second box
-                { x: 100, y: 400 }, // Lowest box (clickable)
-              ]}
-            />
-          </div>
+          <MapScreen
+            onMapComplete={() => setMapComplete(true)}
+            onReturn={restartGame}
+            boxPositions={[
+              { x: 50, y: 100 }, // First box
+              { x: 200, y: 250 }, // Second box
+              { x: 100, y: 400 }, // Lowest box (clickable)
+            ]}
+          />
         ) : !introComplete ? (
           <IntroScene onIntroComplete={() => setIntroComplete(true)} />
         ) : !selectionComplete ? (
