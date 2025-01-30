@@ -1,45 +1,21 @@
 [
     {
       "type": "message",
-      "message": "Now that you knew the reasons, help Jamie focus and finish shopping.",
+      "message": "Ready to help Maddie get back on track?",
       "choices": null,
       "stateInfluence": null
-    },
-    {
-      "type": "question",
-      "message": "..... [Jamie's struggles]",
-      "choices": ["No list? No problem! Let's ...", "Sooo… what's up with the rubber duck", "OMG, this happened again ..", "Say nothing. "],
-      "stateInfluence": [1, -1, 0, 0]
     },
     {
       "type": "message",
-      "message": "a",
-      "choices": null,
+      "message": "There are around 4 “extra” items you see in the cart:\n\nSpicy chips\n\nScented candle\n\nA quirky-flavor soda\n\nA rubber duck.",
+      "choices":null,
       "stateInfluence": null
     },
     {
       "type": "question",
-      "message": "b",
-      "choices": ["1", "2", "3"],
-      "stateInfluence": [1, -1 , 0]
-    },
-    {
-      "type": "question",
-      "message": "c",
-      "choices": ["1", "2"],
-      "stateInfluence": [1, -1]
-    },
-    {
-      "type": "question",
-      "message": "c",
-      "choices": ["1", "2", "3", "4"],
-      "stateInfluence": [1, -1 , 0, 1]
-    },
-    {
-      "type": "message",
-      "message": "Great jobs! ...",
-      "choices": null,
-      "stateInfluence": null
+      "message": "What'll be your response to Maddie?",
+      "choices": ["Sure! Let's grab everything you wanted—why not?", "We can pick two items we really want, but let's skip the rest.", "No extras at all. We should stick to the must-have list."],
+      "stateInfluence": [-1, 1 , -2]
     }
   ]
   

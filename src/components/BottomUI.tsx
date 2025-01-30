@@ -58,7 +58,7 @@ const BottomUI = ({
               key={index}
               className="btn fw-bold my-1 shadow"
               style={{
-                backgroundColor: "#D57A2E",
+                backgroundColor: "#BF4B00",
                 color: "white",
                 borderRadius: "20px",
                 width: "90%",

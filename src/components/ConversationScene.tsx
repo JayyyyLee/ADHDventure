@@ -1,16 +1,15 @@
 import { useState, useEffect } from "react";
 import NPC from "./NPC";
 import BottomUI from "./BottomUI";
-import NPCStateDisplay from "./NPCStateDisplay";
 import conversationRounds from "../data/conversationRounds.json";
+import GameOverScreen from "./GameOverScreen";
 
 const getNPCImage = (state: number) => {
-  if (state === -2) return `${import.meta.env.BASE_URL}test1.jpg`.trim();
-  if (state === -1) return `${import.meta.env.BASE_URL}sad.gif`.trim();
-  if (state === 0) return `${import.meta.env.BASE_URL}test3.jpg`.trim();
-  if (state === 1) return `${import.meta.env.BASE_URL}happy.gif`.trim();
-  if (state === 2) return `${import.meta.env.BASE_URL}test5.jpg`.trim();
-  return `${import.meta.env.BASE_URL}test3.jpg`;
+  if (state === -1) return `${import.meta.env.BASE_URL}sad.gif`;
+  if (state === -2) return `${import.meta.env.BASE_URL}sad.gif`;
+  if (state === 0) return `${import.meta.env.BASE_URL}base.png`;
+  if (state === 1) return `${import.meta.env.BASE_URL}happy.gif`;
+  return `${import.meta.env.BASE_URL}base.png`;
 };
 
 const ConversationScene = ({
@@ -18,39 +17,41 @@ const ConversationScene = ({
   onGameOver,
 }: {
   onRestart: () => void;
-  onGameOver: () => void;
+  onGameOver: (finalState: number) => void;
 }) => {
   const [selectionCount, setSelectionCount] = useState(0);
   const [npcState, setNpcState] = useState({
     id: 1,
-    position: { x: 162, y: 250 },
+    position: { x: 70, y: 165 },
     state: 0,
     image: getNPCImage(0),
     showPopup: true,
     message: conversationRounds[0]?.message || "",
   });
-  const [isTalking, setIsTalking] = useState(false);
 
   const gameEnded = selectionCount >= conversationRounds.length;
 
+  useEffect(() => {
+    if (gameEnded) {
+      onGameOver(npcState.state); // Pass final NPC state
+    }
+  }, [gameEnded, npcState.state, onGameOver]);
+
   if (gameEnded) {
-    onGameOver();
     return null;
   }
 
   const currentRound = conversationRounds[selectionCount] || {};
-  const isQuestion = currentRound.choices && currentRound.choices.length > 0;
-
-  useEffect(() => {
-    if (isQuestion) {
-      setIsTalking(true);
-      const timer = setTimeout(() => setIsTalking(false), 1200);
-      return () => clearTimeout(timer);
-    }
-  }, [selectionCount]);
 
   return (
-    <>
+    <div
+      className="position-relative w-100 h-100 d-flex align-items-center justify-content-center"
+      style={{
+        backgroundImage: `url('/background.png')`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+      }}
+    >
       <div className="position-absolute top-0 start-0 m-2">
         <button
           className="position-absolute m-2 border-0 bg-white rounded-circle shadow-lg d-flex align-items-center justify-content-center"
@@ -66,33 +67,25 @@ const ConversationScene = ({
           ←
         </button>
       </div>
-      <div className="position-absolute top-0 end-0 m-2">
-        <NPCStateDisplay state={npcState.state} />
-      </div>
       <NPC
         position={npcState.position}
-        size={{ width: 100, height: 100 }}
-        image={
-          isTalking ? `${import.meta.env.BASE_URL}talking.gif` : npcState.image
-        }
+        size={{ width: 140, height: 100 }}
+        image={npcState.image}
       />
-      {isQuestion && (
-        <div
-          className="position-absolute bg-light border rounded-circle d-flex align-items-center justify-content-center"
-          style={{
-            width: "120px",
-            height: "120px",
-            left: `${npcState.position.x - 120}px`,
-            top: `${npcState.position.y - 60}px`,
-            textAlign: "center",
-            padding: "10px",
-          }}
-        >
-          {npcState.message}
-        </div>
-      )}
+      <img
+        src="/cart.png"
+        alt="Cart"
+        className="position-absolute"
+        style={{
+          width: "220px",
+          left: "225px",
+          top: "380px",
+          transform: "translate(-50%, -50%)",
+          zIndex: 0,
+        }}
+      />
       <BottomUI
-        message={isQuestion ? "What is your response?" : npcState.message}
+        message={npcState.message}
         showPopup={true}
         onInteract={() => {
           setSelectionCount((prev) => prev + 1);
@@ -125,7 +118,7 @@ const ConversationScene = ({
         }
         choices={currentRound.choices || []}
       />
-    </>
+    </div>
   );
 };
 

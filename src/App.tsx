@@ -1,40 +1,32 @@
 import { useState } from "react";
 import IntroScene from "./components/IntroScene";
 import ConversationScene from "./components/ConversationScene";
+import PostConversationScene from "./components/PostConversation";
 import GameOverScreen from "./components/GameOverScreen";
 import StartScreen from "./components/StartScreen";
-import MapScreen from "./components/MapScreen";
+import NewScene from "./components/Clue";
 import KnowledgeScene from "./components/Knowledge";
-import ClueScene from "./components/Clue";
+import MapScreen from "./components/MapScreen";
 
 const App = () => {
   const [gameStarted, setGameStarted] = useState(false);
   const [mapComplete, setMapComplete] = useState(false);
   const [introComplete, setIntroComplete] = useState(false);
+  const [knowComplete, setKnowComplete] = useState(false);
   const [clueComplete, setClueComplete] = useState(false);
+  const [conversationComplete, setConversationComplete] = useState(false);
+  const [npcFinalState, setNpcFinalState] = useState(0);
   const [gameOver, setGameOver] = useState(false);
-  const [selectedMessage, setSelectedMessage] = useState("");
-  const [knowledgeComplete, setkKnowledgeComplete] = useState(false);
-  const [clickedBoxes, setClickedBoxes] = useState(new Set<number>());
-
-  const handleBoxClick = (id: number, message: string) => {
-    setClickedBoxes((prev) => {
-      const newSet = new Set(prev);
-      newSet.add(id);
-      return newSet;
-    });
-    setSelectedMessage(message);
-  };
 
   const restartGame = () => {
     setGameStarted(false);
     setMapComplete(false);
     setIntroComplete(false);
     setClueComplete(false);
+    setKnowComplete(false);
+    setConversationComplete(false);
+    setNpcFinalState(0);
     setGameOver(false);
-    setkKnowledgeComplete(false);
-    setSelectedMessage("");
-    setClickedBoxes(new Set<number>());
   };
 
   return (
@@ -74,21 +66,30 @@ const App = () => {
             onReturn={restartGame}
           />
         ) : !clueComplete ? (
-          <ClueScene
+          <NewScene
             backgroundImage="/selebg.png"
             message="Tap the shopping cart for more information."
             onButtonClick={() => setClueComplete(true)}
             onReturn={restartGame}
           />
-        ) : !knowledgeComplete ? (
+        ) : !knowComplete ? (
           <KnowledgeScene
-            onKnowledgeComplete={() => setkKnowledgeComplete(true)}
+            onKnowledgeComplete={() => setKnowComplete(true)}
             onReturn={restartGame}
           />
-        ) : (
+        ) : !conversationComplete ? (
           <ConversationScene
             onRestart={restartGame}
-            onGameOver={() => setGameOver(true)}
+            onGameOver={(finalState) => {
+              setNpcFinalState(finalState); // Store final NPC state
+              setConversationComplete(true);
+            }}
+          />
+        ) : (
+          <PostConversationScene
+            npcState={npcFinalState}
+            onNext={() => setGameOver(true)}
+            onReturn={restartGame}
           />
         )}
       </div>
