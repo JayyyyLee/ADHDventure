@@ -13,7 +13,13 @@ const getColorFromState = (state: number) => {
   return "gray"; // Default color for other states
 };
 
-const ConversationScene = ({ onRestart }: { onRestart: () => void }) => {
+const ConversationScene = ({
+  onRestart,
+  onGameOver,
+}: {
+  onRestart: () => void;
+  onGameOver: () => void;
+}) => {
   const [selectionCount, setSelectionCount] = useState(0);
   const [npcState, setNpcState] = useState({
     id: 1,
@@ -25,18 +31,22 @@ const ConversationScene = ({ onRestart }: { onRestart: () => void }) => {
   });
 
   const gameEnded = selectionCount >= conversationRounds.length;
+
+  if (gameEnded) {
+    onGameOver();
+    return null;
+  }
+
   const currentRound = conversationRounds[selectionCount] || {};
 
-  return gameEnded ? (
-    <div className="text-center mt-5">
-      <h1 className="mb-4">Game Over</h1>
-      <p>Thank you for playing!</p>
-      <button className="btn btn-secondary" onClick={onRestart}>
-        Restart
+  return (
+    <div className="position-relative w-100 h-100">
+      <button
+        className="position-absolute top-0 start-0 m-2 btn btn-secondary"
+        onClick={onRestart}
+      >
+        Return
       </button>
-    </div>
-  ) : (
-    <>
       <NPCStateDisplay state={npcState.state} />
       <NPC
         position={npcState.position}
@@ -77,7 +87,7 @@ const ConversationScene = ({ onRestart }: { onRestart: () => void }) => {
         }
         choices={currentRound.choices || []}
       />
-    </>
+    </div>
   );
 };
 

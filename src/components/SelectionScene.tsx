@@ -7,12 +7,14 @@ const SelectionScene = ({
   selectedMessage,
   onBoxClick,
   clickedBoxes,
+  onReturn,
 }: {
   onSelectionComplete: () => void;
   setSelectedMessage: (message: string) => void;
   selectedMessage: string;
   onBoxClick: (id: number, message: string) => void;
   clickedBoxes: Set<number>;
+  onReturn: () => void;
 }) => {
   const boxes = [
     { id: 1, x: 50, y: 100, message: "You found an ancient relic!" },
@@ -23,6 +25,12 @@ const SelectionScene = ({
 
   return (
     <div className="position-relative w-100 h-100 d-flex align-items-center justify-content-center">
+      <button
+        className="position-absolute top-0 start-0 m-2 btn btn-secondary"
+        onClick={onReturn}
+      >
+        Return
+      </button>
       {boxes.map((box) => (
         <div
           key={box.id}
