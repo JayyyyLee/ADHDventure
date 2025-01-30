@@ -5,11 +5,11 @@ import NPCStateDisplay from "./NPCStateDisplay";
 import conversationRounds from "../data/conversationRounds.json";
 
 const getNPCImage = (state: number) => {
-  if (state === -2) return "${import.meta.env.BASE_URL}test1.jpg";
-  if (state === -1) return "${import.meta.env.BASE_URL}test2.jpg";
-  if (state === 0) return "${import.meta.env.BASE_URL}test3.jpg";
-  if (state === 1) return "${import.meta.env.BASE_URL}test4.jpg";
-  if (state === 2) return "${import.meta.env.BASE_URL}test5.jpg";
+  if (state === -2) return "${import.meta.env.BASE_URL}test1.jpg".trim();
+  if (state === -1) return "${import.meta.env.BASE_URL}test2.jpg".trim();
+  if (state === 0) return "${import.meta.env.BASE_URL}test3.jpg".trim();
+  if (state === 1) return "${import.meta.env.BASE_URL}test4.jpg".trim();
+  if (state === 2) return "${import.meta.env.BASE_URL}test5.jpg".trim();
   return "/test3.jpg";
 };
 
