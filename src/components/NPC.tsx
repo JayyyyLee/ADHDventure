@@ -1,24 +1,23 @@
 const NPC = ({
   position,
   size,
-  color,
+  image,
 }: {
   position: { x: number; y: number };
   size: { width: number; height: number };
-  color: string;
+  image: string;
 }) => {
   return (
-    <div
-      className="position-absolute border border-dark"
+    <img
+      src={image}
+      alt="NPC"
       style={{
-        width: `${size.width}px`,
-        height: `${size.height}px`,
+        position: "absolute",
         left: `${position.x}px`,
         top: `${position.y}px`,
-        backgroundColor: color,
-        cursor: "pointer",
+        width: `${size.width}px`,
       }}
-    ></div>
+    />
   );
 };
 

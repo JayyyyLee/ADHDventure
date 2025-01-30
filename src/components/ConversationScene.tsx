@@ -4,13 +4,13 @@ import BottomUI from "./BottomUI";
 import NPCStateDisplay from "./NPCStateDisplay";
 import conversationRounds from "../data/conversationRounds.json";
 
-const getColorFromState = (state: number) => {
-  if (state === 0) return "white";
-  if (state === 1) return "red";
-  if (state === -1) return "blue";
-  if (state === 2) return "green";
-  if (state === -2) return "yellow";
-  return "gray"; // Default color for other states
+const getNPCImage = (state: number) => {
+  if (state === -2) return "/test1.jpg";
+  if (state === -1) return "/test2.jpg";
+  if (state === 0) return "/test3.jpg";
+  if (state === 1) return "/test4.jpg";
+  if (state === 2) return "/test5.jpg";
+  return "/test3.jpg";
 };
 
 const ConversationScene = ({
@@ -25,7 +25,7 @@ const ConversationScene = ({
     id: 1,
     position: { x: 162, y: 250 },
     state: 0,
-    color: "white",
+    image: getNPCImage(0),
     showPopup: true,
     message: conversationRounds[0]?.message || "",
   });
@@ -40,18 +40,19 @@ const ConversationScene = ({
   const currentRound = conversationRounds[selectionCount] || {};
 
   return (
-    <div className="position-relative w-100 h-100">
-      <button
-        className="position-absolute top-0 start-0 m-2 btn btn-secondary"
-        onClick={onRestart}
-      >
-        Return
-      </button>
-      <NPCStateDisplay state={npcState.state} />
+    <>
+      <div className="position-absolute top-0 start-0 m-2">
+        <button className="btn btn-secondary" onClick={onRestart}>
+          Return
+        </button>
+      </div>
+      <div className="position-absolute top-0 end-0 m-2">
+        <NPCStateDisplay state={npcState.state} />
+      </div>
       <NPC
         position={npcState.position}
-        size={{ width: 50, height: 50 }}
-        color={npcState.color}
+        size={{ width: 100, height: 100 }}
+        image={npcState.image}
       />
       <BottomUI
         message={npcState.message}
@@ -71,12 +72,12 @@ const ConversationScene = ({
           const newState =
             npcState.state +
             (choiceIndex !== -1 ? currentRound.stateInfluence[choiceIndex] : 0);
-          const newColor = getColorFromState(newState);
+          const newImage = getNPCImage(newState);
           setSelectionCount((prev) => prev + 1);
           setNpcState((prev) => ({
             ...prev,
             state: newState,
-            color: newColor,
+            image: newImage,
             message:
               conversationRounds[selectionCount + 1]?.message ||
               "The journey ends here...",
@@ -87,7 +88,7 @@ const ConversationScene = ({
         }
         choices={currentRound.choices || []}
       />
-    </div>
+    </>
   );
 };
 
