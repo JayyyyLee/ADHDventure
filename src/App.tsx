@@ -4,15 +4,17 @@ import ConversationScene from "./components/ConversationScene";
 import GameOverScreen from "./components/GameOverScreen";
 import StartScreen from "./components/StartScreen";
 import MapScreen from "./components/MapScreen";
-import SelectionScene from "./components/SelectionScene";
+import KnowledgeScene from "./components/Knowledge";
+import ClueScene from "./components/Clue";
 
 const App = () => {
   const [gameStarted, setGameStarted] = useState(false);
   const [mapComplete, setMapComplete] = useState(false);
   const [introComplete, setIntroComplete] = useState(false);
-  const [selectionComplete, setSelectionComplete] = useState(false);
+  const [clueComplete, setClueComplete] = useState(false);
   const [gameOver, setGameOver] = useState(false);
   const [selectedMessage, setSelectedMessage] = useState("");
+  const [knowledgeComplete, setkKnowledgeComplete] = useState(false);
   const [clickedBoxes, setClickedBoxes] = useState(new Set<number>());
 
   const handleBoxClick = (id: number, message: string) => {
@@ -28,8 +30,9 @@ const App = () => {
     setGameStarted(false);
     setMapComplete(false);
     setIntroComplete(false);
-    setSelectionComplete(false);
+    setClueComplete(false);
     setGameOver(false);
+    setkKnowledgeComplete(false);
     setSelectedMessage("");
     setClickedBoxes(new Set<number>());
   };
@@ -41,7 +44,7 @@ const App = () => {
         style={{
           width: "375px",
           height: "667px",
-          backgroundColor: "white",
+          backgroundColor: "#FFE3D1",
           border: "4px solid black",
           borderRadius: "15px",
           overflow: "hidden",
@@ -56,13 +59,13 @@ const App = () => {
             onMapComplete={() => setMapComplete(true)}
             onReturn={restartGame}
             boxPositions={[
-              { x: 120, y: 30, image: `${import.meta.env.BASE_URL}place3.png` }, // First place
+              { x: 120, y: 30, image: `${import.meta.env.BASE_URL}place3.png` },
               {
                 x: 200,
                 y: 250,
                 image: `${import.meta.env.BASE_URL}place2.png`,
-              }, // Second place
-              { x: 0, y: 450, image: `${import.meta.env.BASE_URL}place1.png` }, // Third place (clickable)
+              },
+              { x: 0, y: 450, image: `${import.meta.env.BASE_URL}place1.png` },
             ]}
           />
         ) : !introComplete ? (
@@ -70,13 +73,16 @@ const App = () => {
             onIntroComplete={() => setIntroComplete(true)}
             onReturn={restartGame}
           />
-        ) : !selectionComplete ? (
-          <SelectionScene
-            onSelectionComplete={() => setSelectionComplete(true)}
-            setSelectedMessage={setSelectedMessage}
-            selectedMessage={selectedMessage}
-            onBoxClick={handleBoxClick}
-            clickedBoxes={clickedBoxes}
+        ) : !clueComplete ? (
+          <ClueScene
+            backgroundImage="/selebg.png"
+            message="Tap the shopping cart for more information."
+            onButtonClick={() => setClueComplete(true)}
+            onReturn={restartGame}
+          />
+        ) : !knowledgeComplete ? (
+          <KnowledgeScene
+            onKnowledgeComplete={() => setkKnowledgeComplete(true)}
             onReturn={restartGame}
           />
         ) : (
