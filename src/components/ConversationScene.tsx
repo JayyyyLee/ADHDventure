@@ -6,9 +6,9 @@ import conversationRounds from "../data/conversationRounds.json";
 
 const getNPCImage = (state: number) => {
   if (state === -2) return `${import.meta.env.BASE_URL}test1.jpg`.trim();
-  if (state === -1) return `${import.meta.env.BASE_URL}test2.jpg`.trim();
+  if (state === -1) return `${import.meta.env.BASE_URL}sad.gif`.trim();
   if (state === 0) return `${import.meta.env.BASE_URL}test3.jpg`.trim();
-  if (state === 1) return `${import.meta.env.BASE_URL}test4.jpg`.trim();
+  if (state === 1) return `${import.meta.env.BASE_URL}happy.gif`.trim();
   if (state === 2) return `${import.meta.env.BASE_URL}test5.jpg`.trim();
   return `${import.meta.env.BASE_URL}test3.jpg`;
 };
@@ -52,8 +52,18 @@ const ConversationScene = ({
   return (
     <>
       <div className="position-absolute top-0 start-0 m-2">
-        <button className="btn btn-secondary" onClick={onRestart}>
-          Return
+        <button
+          className="position-absolute m-2 border-0 bg-white rounded-circle shadow-lg d-flex align-items-center justify-content-center"
+          style={{
+            top: "20px",
+            left: "20px",
+            width: "35px",
+            height: "35px",
+            boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.2)",
+          }}
+          onClick={onRestart}
+        >
+          ←
         </button>
       </div>
       <div className="position-absolute top-0 end-0 m-2">

@@ -56,9 +56,13 @@ const App = () => {
             onMapComplete={() => setMapComplete(true)}
             onReturn={restartGame}
             boxPositions={[
-              { x: 50, y: 100 }, // First box
-              { x: 200, y: 250 }, // Second box
-              { x: 100, y: 400 }, // Lowest box (clickable)
+              { x: 120, y: 30, image: `${import.meta.env.BASE_URL}place3.png` }, // First place
+              {
+                x: 200,
+                y: 250,
+                image: `${import.meta.env.BASE_URL}place2.png`,
+              }, // Second place
+              { x: 0, y: 450, image: `${import.meta.env.BASE_URL}place1.png` }, // Third place (clickable)
             ]}
           />
         ) : !introComplete ? (
