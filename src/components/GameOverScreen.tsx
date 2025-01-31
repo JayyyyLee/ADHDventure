@@ -5,7 +5,7 @@ const GameOverScreen = ({ onRestart }: { onRestart: () => void }) => {
     <div
       className="position-relative w-100 h-100 d-flex align-items-center justify-content-center"
       style={{
-        backgroundImage: "url('/supno.png')",
+        backgroundImage: `url('${import.meta.env.BASE_URL}supno.png')`,
         backgroundSize: "cover",
         backgroundPosition: "center",
       }}
@@ -28,7 +28,7 @@ const GameOverScreen = ({ onRestart }: { onRestart: () => void }) => {
       >
         {/* Trophy Image Above the Box */}
         <img
-          src="/cong.png"
+          src={`${import.meta.env.BASE_URL}cong.png`}
           alt="Game Over"
           style={{
             width: "200px",

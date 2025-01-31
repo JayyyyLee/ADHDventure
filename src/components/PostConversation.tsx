@@ -14,9 +14,9 @@ const getNPCMessage = (state: number) => {
   if (state === -1)
     return "You and Maddie went way over budget. Maddie feels frustrated during the checkout.";
   if (state === -2)
-    return "You stayed within the budget, but you missed out on Maddie’s excitement. ";
+    return "You stayed within the budget, but you missed out on Maddie's excitement. ";
   if (state === 1)
-    return "Great balance! You incorporated Maddie’s spontaneity while staying on track financially. She’s happy that you’ve considered her whim.";
+    return "Great balance! You incorporated Maddie's spontaneity while staying on track financially. She's happy that you've considered her whim.";
   return "The NPC is looking at you...";
 };
 
@@ -41,7 +41,7 @@ const PostConversationScene = ({
     <div
       className="position-relative w-100 h-100 d-flex align-items-center justify-content-center"
       style={{
-        backgroundImage: `url('/background.png')`,
+        backgroundImage: `url('${import.meta.env.BASE_URL}background.png')`,
         backgroundSize: "cover",
         backgroundPosition: "center",
       }}
