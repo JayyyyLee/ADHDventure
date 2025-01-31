@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { motion } from "framer-motion";
 
 const GameOverScreen = ({ onProceed }: { onProceed: () => void }) => {
   const [showGameOverBox, setShowGameOverBox] = useState(true);
@@ -18,7 +19,11 @@ const GameOverScreen = ({ onProceed }: { onProceed: () => void }) => {
   };
 
   return (
-    <div
+    <motion.div
+      key={background}
+      initial={{ opacity: 0, scale: 0.9 }}
+      animate={{ opacity: 1, scale: 1, transition: { duration: 0.4 } }}
+      exit={{ opacity: 0, scale: 0.9, transition: { duration: 0.3 } }}
       className="position-relative w-100 h-100 d-flex align-items-center justify-content-center"
       style={{
         backgroundImage: `url('${background}')`,
@@ -28,7 +33,10 @@ const GameOverScreen = ({ onProceed }: { onProceed: () => void }) => {
     >
       {showEverything &&
         (showGameOverBox ? (
-          <div
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1, transition: { duration: 0.4 } }}
+            exit={{ opacity: 0, scale: 0.9, transition: { duration: 0.3 } }}
             className="position-absolute shadow-lg d-flex flex-column align-items-center justify-content-center"
             style={{
               width: "80%",
@@ -36,7 +44,7 @@ const GameOverScreen = ({ onProceed }: { onProceed: () => void }) => {
               height: "450px",
               padding: "30px 20px 20px",
               borderRadius: "25px",
-              top: "45%",
+              top: "15%",
               transform: "translateY(-50%)",
               backgroundColor: "#FFEBDD",
               textAlign: "center",
@@ -93,7 +101,7 @@ const GameOverScreen = ({ onProceed }: { onProceed: () => void }) => {
             >
               Done!
             </button>
-          </div>
+          </motion.div>
         ) : (
           <button
             className="position-absolute fw-bold shadow border-0"
@@ -110,7 +118,7 @@ const GameOverScreen = ({ onProceed }: { onProceed: () => void }) => {
             Let's go!
           </button>
         ))}
-    </div>
+    </motion.div>
   );
 };
 

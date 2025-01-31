@@ -3,6 +3,7 @@ import NPC from "./NPC";
 import BottomUI from "./BottomUI";
 import conversationRounds from "../data/conversationRounds.json";
 import GameOverScreen from "./GameOverScreen";
+import { motion } from "framer-motion";
 
 const getNPCImage = (state: number) => {
   if (state === -1) return `${import.meta.env.BASE_URL}sad.gif`;
@@ -44,81 +45,95 @@ const ConversationScene = ({
   const currentRound = conversationRounds[selectionCount] || {};
 
   return (
-    <div
+    <motion.div
+      initial={{ opacity: 0, scale: 0.9 }}
+      animate={{ opacity: 1, scale: 1, transition: { duration: 0.4 } }}
+      exit={{ opacity: 0, scale: 0.9, transition: { duration: 0.3 } }}
       className="position-relative w-100 h-100 d-flex align-items-center justify-content-center"
       style={{
-        backgroundImage: `url('${import.meta.env.BASE_URL}background.png')`,
+        backgroundImage: `url('/background.png')`,
         backgroundSize: "cover",
         backgroundPosition: "center",
       }}
     >
-      <div className="position-absolute top-0 start-0 m-2">
-        <button
-          className="position-absolute m-2 border-0 bg-white rounded-circle shadow-lg d-flex align-items-center justify-content-center"
-          style={{
-            top: "20px",
-            left: "20px",
-            width: "35px",
-            height: "35px",
-            boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.2)",
-          }}
-          onClick={onRestart}
-        >
-          ←
-        </button>
-      </div>
-      <NPC
-        position={npcState.position}
-        size={{ width: 140, height: 100 }}
-        image={npcState.image}
-      />
-      <img
-        src={`${import.meta.env.BASE_URL}cart.png`}
-        alt="Cart"
-        className="position-absolute"
+      <div
+        className="position-relative w-100 h-100 d-flex align-items-center justify-content-center"
         style={{
-          width: "220px",
-          left: "225px",
-          top: "380px",
-          transform: "translate(-50%, -50%)",
-          zIndex: 0,
+          backgroundImage: `url('${import.meta.env.BASE_URL}background.png')`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
         }}
-      />
-      <BottomUI
-        message={npcState.message}
-        showPopup={true}
-        onInteract={() => {
-          setSelectionCount((prev) => prev + 1);
-          setNpcState((prev) => ({
-            ...prev,
-            message:
-              conversationRounds[selectionCount + 1]?.message ||
-              "The journey ends here...",
-          }));
-        }}
-        onSelect={(choice) => {
-          if (!currentRound.choices) return;
-          const choiceIndex = currentRound.choices.indexOf(choice);
-          const newState =
-            npcState.state +
-            (choiceIndex !== -1 ? currentRound.stateInfluence[choiceIndex] : 0);
-          const newImage = getNPCImage(newState);
-          setSelectionCount((prev) => prev + 1);
-          setNpcState((prev) => ({
-            ...prev,
-            state: newState,
-            image: newImage,
-            message:
-              conversationRounds[selectionCount + 1]?.message ||
-              "The journey ends here...",
-          }));
-        }}
-        showNextButton={
-          !currentRound.choices || currentRound.choices.length === 0
-        }
-        choices={currentRound.choices || []}
-      />
-    </div>
+      >
+        <div className="position-absolute top-0 start-0 m-2">
+          <button
+            className="position-absolute m-2 border-0 bg-white rounded-circle shadow-lg d-flex align-items-center justify-content-center"
+            style={{
+              top: "20px",
+              left: "20px",
+              width: "35px",
+              height: "35px",
+              boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.2)",
+            }}
+            onClick={onRestart}
+          >
+            ←
+          </button>
+        </div>
+        <NPC
+          position={npcState.position}
+          size={{ width: 140, height: 100 }}
+          image={npcState.image}
+        />
+        <img
+          src={`${import.meta.env.BASE_URL}cart.png`}
+          alt="Cart"
+          className="position-absolute"
+          style={{
+            width: "220px",
+            left: "225px",
+            top: "380px",
+            transform: "translate(-50%, -50%)",
+            zIndex: 0,
+          }}
+        />
+        <BottomUI
+          message={npcState.message}
+          showPopup={true}
+          onInteract={() => {
+            setSelectionCount((prev) => prev + 1);
+            setNpcState((prev) => ({
+              ...prev,
+              message:
+                conversationRounds[selectionCount + 1]?.message ||
+                "The journey ends here...",
+            }));
+          }}
+          onSelect={(choice) => {
+            if (!currentRound.choices) return;
+            const choiceIndex = currentRound.choices.indexOf(choice);
+            const newState =
+              npcState.state +
+              (choiceIndex !== -1
+                ? currentRound.stateInfluence[choiceIndex]
+                : 0);
+            const newImage = getNPCImage(newState);
+            setSelectionCount((prev) => prev + 1);
+            setNpcState((prev) => ({
+              ...prev,
+              state: newState,
+              image: newImage,
+              message:
+                conversationRounds[selectionCount + 1]?.message ||
+                "The journey ends here...",
+            }));
+          }}
+          showNextButton={
+            !currentRound.choices || currentRound.choices.length === 0
+          }
+          choices={currentRound.choices || []}
+        />
+      </div>
+    </motion.div>
   );
 };
 

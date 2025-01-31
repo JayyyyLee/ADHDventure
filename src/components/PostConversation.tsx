@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import NPC from "./NPC";
 import BottomUI from "./BottomUI";
+import { motion } from "framer-motion";
 
 const getNPCImage = (state: number) => {
   if (state === -1) return `${import.meta.env.BASE_URL}sad.gif`;
@@ -40,7 +41,10 @@ const PostConversationScene = ({
   }, [npcState]);
 
   return (
-    <div
+    <motion.div
+      initial={{ opacity: 0, scale: 0.9 }}
+      animate={{ opacity: 1, scale: 1, transition: { duration: 0.4 } }}
+      exit={{ opacity: 0, scale: 0.9, transition: { duration: 0.3 } }}
       className="position-relative w-100 h-100 d-flex align-items-center justify-content-center"
       style={{
         backgroundImage: `url('${import.meta.env.BASE_URL}background.png')`,
@@ -48,47 +52,56 @@ const PostConversationScene = ({
         backgroundPosition: "center",
       }}
     >
-      {" "}
-      <button
-        className="position-absolute m-2 border-0 bg-white rounded-circle shadow-lg d-flex align-items-center justify-content-center"
+      <div
+        className="position-relative w-100 h-100 d-flex align-items-center justify-content-center"
         style={{
-          top: "20px",
-          left: "20px",
-          width: "35px",
-          height: "35px",
-          boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.2)",
+          backgroundImage: `url('${import.meta.env.BASE_URL}background.png')`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
         }}
-        onClick={onReturn}
       >
-        ←
-      </button>
-      <NPC
-        position={{ x: 70, y: 165 }}
-        size={{ width: 140, height: 100 }}
-        image={npcImage}
-      />
-      <img
-        src={`${import.meta.env.BASE_URL}cart.png`}
-        alt="Cart"
-        className="position-absolute"
-        style={{
-          width: "220px",
-          left: "225px",
-          top: "380px",
-          transform: "translate(-50%, -50%)",
-          zIndex: 0,
-        }}
-      />
-      <BottomUI
-        message={npcMessage}
-        showPopup={true}
-        onInteract={npcState > 0 ? onNext : onRetry}
-        onSelect={() => {}}
-        showNextButton={true}
-        isRetry={npcState > 0 ? false : true}
-        choices={[]}
-      />
-    </div>
+        {" "}
+        <button
+          className="position-absolute m-2 border-0 bg-white rounded-circle shadow-lg d-flex align-items-center justify-content-center"
+          style={{
+            top: "20px",
+            left: "20px",
+            width: "35px",
+            height: "35px",
+            boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.2)",
+          }}
+          onClick={onReturn}
+        >
+          ←
+        </button>
+        <NPC
+          position={{ x: 70, y: 165 }}
+          size={{ width: 140, height: 100 }}
+          image={npcImage}
+        />
+        <img
+          src={`${import.meta.env.BASE_URL}cart.png`}
+          alt="Cart"
+          className="position-absolute"
+          style={{
+            width: "220px",
+            left: "225px",
+            top: "380px",
+            transform: "translate(-50%, -50%)",
+            zIndex: 0,
+          }}
+        />
+        <BottomUI
+          message={npcMessage}
+          showPopup={true}
+          onInteract={npcState > 0 ? onNext : onRetry}
+          onSelect={() => {}}
+          showNextButton={true}
+          isRetry={npcState > 0 ? false : true}
+          choices={[]}
+        />
+      </div>
+    </motion.div>
   );
 };
 
