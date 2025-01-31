@@ -72,7 +72,7 @@ const MapScreen = ({
           {/* Stars Image Placeholder */}
           <div className="d-flex justify-content-center mb-3">
             <img
-              src="/star.png"
+              src={`${import.meta.env.BASE_URL}star.png`}
               alt="Stars"
               style={{ width: "200px", position: "absolute", top: "-70px" }}
             />
