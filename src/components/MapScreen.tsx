@@ -93,19 +93,19 @@ const MapScreen = ({
             </div>
             {/* Title */}
             <h3 className="fw-bold" style={{ fontSize: "20px" }}>
-              The Coffee Rush
+              The Lost Grocery List
             </h3>
             {/* Description */}
             <p style={{ fontSize: "14px", color: "#555" }}>
-              Help Aiden order the right coffee on time!
+              Help Maddie go through the grocery challenge!
             </p>
             {/* Clue and Time Info */}
             <p style={{ fontSize: "14px", fontWeight: "bold" }}>
-              Hidden Clues: <span style={{ fontWeight: "normal" }}>4</span>
+              Hidden Clues: <span style={{ fontWeight: "normal" }}>3</span>
             </p>
             <p style={{ fontSize: "14px", fontWeight: "bold" }}>
               Estimated Time:{" "}
-              <span style={{ fontWeight: "normal" }}>20 minutes</span>
+              <span style={{ fontWeight: "normal" }}>15 minutes</span>
             </p>
             {/* Buttons */}
             <button
