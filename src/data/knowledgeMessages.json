@@ -4,7 +4,10 @@
       "image": "/know1.png"
     },
     {
-      "message": "Impulsivity \n\n Sometimes, ADHD brains are drawn to novelty and spur-of-the-moment ideas. This can lead to buying items that seem fun at the time (like scented candles or a quirky snack), but it can also mean forgetting essentials.",
+      "message": "Impulsivity \t\t Sometimes, ADHD brains are drawn to novelty and spur-of-the-moment ideas. This can lead to buying items that seem fun at the time (like scented candles or a quirky snack), but it can also mean forgetting essentials.",
+      "image": "/know2.png"
+    },    {
+      "message": "Impulsivity\t\tOn the plus side, Maddie's spontaneity might spark new recipe ideas!",
       "image": "/know2.png"
     },
     {
@@ -16,7 +19,7 @@
       "image": "/know3.png"
     },
     {
-      "message": "Set a 'Fun Item Limit' \n\n Choose one or two bonus items, but keep the rest of the budget for must-haves.",
+      "message": "Set a 'Fun Item Limit' \t\t Choose one or two bonus items, but keep the rest of the budget for must-haves.",
       "image": "/know3.png"
     }
   ]
