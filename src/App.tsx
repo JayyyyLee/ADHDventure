@@ -45,7 +45,7 @@ const App = () => {
         {!gameStarted ? (
           <StartScreen onStart={() => setGameStarted(true)} />
         ) : gameOver ? (
-          <GameOverScreen onRestart={restartGame} />
+          <GameOverScreen onProceed={restartGame} />
         ) : !mapComplete ? (
           <MapScreen
             onMapComplete={() => setMapComplete(true)}
