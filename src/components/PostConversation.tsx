@@ -65,7 +65,7 @@ const PostConversationScene = ({
         image={npcImage}
       />
       <img
-        src="/cart.png"
+        src={`${import.meta.env.BASE_URL}cart.png`}
         alt="Cart"
         className="position-absolute"
         style={{

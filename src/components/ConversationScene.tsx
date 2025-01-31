@@ -47,7 +47,7 @@ const ConversationScene = ({
     <div
       className="position-relative w-100 h-100 d-flex align-items-center justify-content-center"
       style={{
-        backgroundImage: `url('/background.png')`,
+        backgroundImage: `url('${import.meta.env.BASE_URL}background.png')`,
         backgroundSize: "cover",
         backgroundPosition: "center",
       }}
@@ -73,7 +73,7 @@ const ConversationScene = ({
         image={npcState.image}
       />
       <img
-        src="/cart.png"
+        src={`${import.meta.env.BASE_URL}cart.png`}
         alt="Cart"
         className="position-absolute"
         style={{
