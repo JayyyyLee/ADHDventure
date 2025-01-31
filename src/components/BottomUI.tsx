@@ -7,6 +7,7 @@ const BottomUI = ({
   onSelect,
   showNextButton,
   choices = [],
+  isRetry = false,
 }: {
   message?: string;
   showPopup: boolean;
@@ -14,6 +15,7 @@ const BottomUI = ({
   onSelect: (choice: string) => void;
   showNextButton: boolean;
   choices?: string[];
+  isRetry?: boolean;
 }) => {
   // Ensure message is defined before processing
   let [title, body] =
@@ -39,7 +41,7 @@ const BottomUI = ({
           <h3
             className="fw-bold"
             style={{
-              fontSize: "24px",
+              fontSize: "18px",
               marginBottom: "10px",
               whiteSpace: "pre-line",
             }}
@@ -65,7 +67,7 @@ const BottomUI = ({
           }}
           onClick={onInteract}
         >
-          Next
+          {isRetry ? "Retry" : "Next"}
         </button>
       )}
       {choices?.length > 0 && (

@@ -88,6 +88,7 @@ const App = () => {
         ) : (
           <PostConversationScene
             npcState={npcFinalState}
+            onRetry={() => setConversationComplete(false)}
             onNext={() => setGameOver(true)}
             onReturn={restartGame}
           />

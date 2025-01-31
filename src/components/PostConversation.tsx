@@ -23,10 +23,12 @@ const getNPCMessage = (state: number) => {
 const PostConversationScene = ({
   npcState,
   onNext,
+  onRetry,
   onReturn,
 }: {
   npcState: number;
   onNext: () => void;
+  onRetry: () => void;
   onReturn: () => void;
 }) => {
   const [npcImage, setNpcImage] = useState(getNPCImage(npcState));
@@ -46,6 +48,7 @@ const PostConversationScene = ({
         backgroundPosition: "center",
       }}
     >
+      {" "}
       <button
         className="position-absolute m-2 border-0 bg-white rounded-circle shadow-lg d-flex align-items-center justify-content-center"
         style={{
@@ -79,9 +82,10 @@ const PostConversationScene = ({
       <BottomUI
         message={npcMessage}
         showPopup={true}
-        onInteract={onNext}
+        onInteract={npcState > 0 ? onNext : onRetry}
         onSelect={() => {}}
         showNextButton={true}
+        isRetry={npcState > 0 ? false : true}
         choices={[]}
       />
     </div>
